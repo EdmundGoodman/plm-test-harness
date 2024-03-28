@@ -1,0 +1,6 @@
+DEF INC x { x+1 } ;
+DEF MAIN { INC(INC(INC(INC(INC(INC(INC(INC(INC(1))))))))) } ;
+=====
+PASS
+10
+=====

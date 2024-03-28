@@ -1,0 +1,15 @@
+DEF A x { x } ;
+DEF B x { A(x)+A(x)+A(x)+A(x)+A(x)+A(x)+A(x)+A(x)+A(x)+A(x) } ;
+DEF C x { B(x)+B(x)+B(x)+B(x)+B(x)+B(x)+B(x)+B(x)+B(x)+B(x) } ;
+DEF D x { C(x)+C(x)+C(x)+C(x)+C(x)+C(x)+C(x)+C(x)+C(x)+C(x) } ;
+DEF E x { D(x)+D(x)+D(x)+D(x)+D(x)+D(x)+D(x)+D(x)+D(x)+D(x) } ;
+DEF F x { E(x)+E(x)+E(x)+E(x)+E(x)+E(x)+E(x)+E(x)+E(x)+E(x) } ;
+DEF G x { F(x)+F(x)+F(x)+F(x)+F(x)+F(x)+F(x)+F(x)+F(x)+F(x) } ;
+DEF H x { G(x)+G(x)+G(x)+G(x)+G(x)+G(x)+G(x)+G(x)+G(x)+G(x) } ;
+DEF I x { H(x)+H(x)+H(x)+H(x)+H(x)+H(x)+H(x)+H(x)+H(x)+H(x) } ;
+DEF J x { I(x)+I(x)+I(x)+I(x)+I(x)+I(x)+I(x)+I(x)+I(x)+I(x) } ;
+DEF MAIN { J(1) } ;
+=====
+PASS
+1000000000
+=====

@@ -1,0 +1,6 @@
+DEF TESTPRIME x { TESTPRIME(x)+3 } ;
+DEF MAIN { TESTPRIME(4) } ;
+=====
+PASS
+DIVERGENCE
+=====

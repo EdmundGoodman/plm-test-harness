@@ -1,0 +1,3 @@
+DEF FOO x { y } ;
+DEF MAIN { FOO(1) } ;
+=====

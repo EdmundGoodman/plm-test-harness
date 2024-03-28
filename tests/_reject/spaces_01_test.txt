@@ -1,0 +1,3 @@
+DEFFUNC x { x } ;
+DEF MAIN { 1 } ;
+=====

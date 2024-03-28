@@ -1,0 +1,3 @@
+DEF FUNC f { MAIN(1+1)*f } ;
+DEF MAIN { FUNC(9) } ;
+=====

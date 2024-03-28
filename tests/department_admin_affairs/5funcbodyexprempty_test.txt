@@ -1,0 +1,3 @@
+DEF TEST x {  } ;
+DEF MAIN { TEST(3) } ;
+=====

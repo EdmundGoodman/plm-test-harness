@@ -1,0 +1,6 @@
+DEF ID x { x } ;
+DEF MAIN { ID(7) } ;
+=====
+PASS
+7
+=====

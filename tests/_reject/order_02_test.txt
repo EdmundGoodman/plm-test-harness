@@ -1,0 +1,3 @@
+DEF x FUNC { 1 } ;
+DEF MAIN { 1 } ;
+=====

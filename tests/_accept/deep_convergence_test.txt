@@ -1,0 +1,31 @@
+DEF A x { x+1 } ;
+DEF B x { A(x+1) } ;
+DEF C x { B(x+1) } ;
+DEF D x { C(x+1) } ;
+DEF E x { D(x+1) } ;
+DEF F x { E(x+1) } ;
+DEF G x { F(x+1) } ;
+DEF H x { G(x+1) } ;
+DEF I x { H(x+1) } ;
+DEF J x { I(x+1) } ;
+DEF K x { J(x+1) } ;
+DEF L x { K(x+1) } ;
+DEF M x { L(x+1) } ;
+DEF N x { M(x+1) } ;
+DEF O x { N(x+1) } ;
+DEF P x { O(x+1) } ;
+DEF Q x { P(x+1) } ;
+DEF R x { Q(x+1) } ;
+DEF S x { R(x+1) } ;
+DEF T x { S(x+1) } ;
+DEF U x { T(x+1) } ;
+DEF V x { U(x+1) } ;
+DEF W x { V(x+1) } ;
+DEF X x { W(x+1) } ;
+DEF Y x { X(x+1) } ;
+DEF Z x { Y(x+1) } ;
+DEF MAIN { Z(1) } ;
+=====
+PASS
+27
+=====

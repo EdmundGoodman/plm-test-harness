@@ -1,0 +1,9 @@
+DEF A x { x } ;
+DEF B x { A(x)+A(x)+A(x)+A(x)+A(x)+A(x)+A(x)+A(x)+A(x)+A(x) } ;
+DEF C x { B(x)+B(x)+B(x)+B(x)+B(x)+B(x)+B(x)+B(x)+B(x)+B(x) } ;
+DEF D x { C(x)+C(x)+C(x)+C(x)+C(x)+C(x)+C(x)+C(x)+C(x)+C(x) } ;
+DEF MAIN { D(1) } ;
+=====
+PASS
+1000
+=====

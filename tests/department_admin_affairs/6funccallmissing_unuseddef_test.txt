@@ -1,0 +1,4 @@
+DEF TEST x { x+3 } ;
+DEF MAIN { TEST(3) } ;
+DEF DUMMY x { UNKNOWN(2) } ;
+=====

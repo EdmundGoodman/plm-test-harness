@@ -1,0 +1,3 @@
+DIF FOO x { x } ;
+DEF MAIN { 1 } ;
+=====

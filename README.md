@@ -45,7 +45,7 @@ to add the line number and error message of the failure.***
 
 ### Test file format
 
-Test cases should be given as .txt files including the word "test" in
+Test cases should be given as text files including the word "test" in
 their name. The schema of the file is the stdin, followed by the stdout,
 followed by the stderr, seperated by `=====\n` (5 equals on a newline).
 

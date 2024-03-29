@@ -40,8 +40,8 @@ of this, I have redacted all my error messages for the failing tests, as
 they would allude to my approach to error handling, and my approach
 shouldn't be treated as a canonical solution anyway.
 
-As a result of this, for failing tests you should edit the test files
-to add the line number and error message of the failure.
+***As a result of this, for failing tests you should edit the test files
+to add the line number and error message of the failure.***
 
 ### Test file format
 
@@ -68,6 +68,13 @@ name. They will then automatically get picked up and drive your JavaCC implement
 repository for others to use as well!*
 
 ## Other notes
+
+At the time I wrote these tests, I checked with the module
+organiser that it was acceptable to share them (with the
+modification of not sharing error messages), as they are not
+coursework solutions, just a set of helpful tests. If I am
+ever told that this policy has changed, I will make this
+repository private.
 
 Note that the coursework spec is subject to change, so it
 is possible that some tests will become out of date. This

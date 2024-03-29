@@ -24,10 +24,10 @@ the coursework in 2021.
 First, copy the `test.py` file and the `tests/` directory to the directory
 containing your `Assignment.jj` file.
 
-Then, the test harness can be run as:
+Then, the test harness can be run as (requires python versions >= 3.7):
 
 ```bash
-python3 test.py
+python3.11 test.py
 ```
 
 This should run all the tests and print a colour-coded output for which

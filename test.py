@@ -1,39 +1,45 @@
-from subprocess import run, TimeoutExpired
-from pathlib import Path
-from re import compile
+"""A test harness for the CS259 PLM language."""
 from dataclasses import dataclass
+from pathlib import Path
+from subprocess import TimeoutExpired, run
+from re import compile as re_compile
 from time import perf_counter
-import resource
+from typing import Optional
+
+
+# Constant configuration variables
+PROGRAM_FILE: str = "Assignment.jj"
+OUTPUT_EXECUTABLE: str = "Assignment"
+TESTS_DIRECTORY: str = "tests"
+TEST_TIMEOUT: float = 5.0
+SHOW_FAILURE: bool = True
+STDTYPE_DELIMITER: str = "=====\n"
+
 
 # Set terminal string colour escape codes
-OKGREEN = '\033[92m'
-OKBLUE = '\033[94m'
-WARNING = '\033[93m'
-FAIL = '\033[91m'
-ENDC = '\033[0m'
+OKGREEN = "\033[92m"
+OKBLUE = "\033[94m"
+WARNING = "\033[93m"
+FAIL = "\033[91m"
+ENDC = "\033[0m"
 
 
 @dataclass
 class Tester:
-    # Constant settings
-    PROGRAM_FILE: str = "Assignment.jj"
-    OUTPUT_EXECUTABLE: str = "Assignment"
-    TESTS_DIRECTORY: str = "tests"
-    TEST_TIMEOUT: int = 5
-    SHOW_FAILURE: bool = True
-    STDTYPE_DELIMITER: str = "=====\n"
-    # Status variables
+    """A class to run the tests."""
+
     tests_run: int = 0
     tests_passed: int = 0
     tests_failed: int = 0
     tests_timedout: int = 0
-    time_taken: int = 0
+    time_taken: float = 0
+    num_tests: Optional[int] = None
 
     def compile(self):
         """Compile the JavaCC code"""
         print(f"{OKBLUE}===== Compiling JavaCC code ====={ENDC}")
-        run(["javacc", self.PROGRAM_FILE])
-        run(["javac *.java"], shell=True)
+        run(["javacc", PROGRAM_FILE], check=False)
+        run(["javac *.java"], shell=True, check=False)
         print(f"{OKBLUE}===== Compiled JavaCC code ====={ENDC}\n\n")
 
     def test(self):
@@ -54,10 +60,9 @@ class Tester:
         ```
         """
         try:
-
-            tests_dir = Path(self.TESTS_DIRECTORY)
-            test_pattern = compile(".*test.*\.txt")
-            test_files = []
+            tests_dir = Path(TESTS_DIRECTORY)
+            test_pattern = re_compile(r".*test.*\.txt")
+            test_files: list[str] = []
 
             for file in tests_dir.rglob("*"):
                 if test_pattern.match(file.name):
@@ -71,16 +76,19 @@ class Tester:
                 print(f"{OKBLUE}{self.tests_run+1}/{self.num_tests}){ENDC}", end="")
                 self.tests_run += 1
 
+                single_time = 0.0
                 try:
-                    with open(test_file, "r") as file_handle:
-                        file_data = file_handle.read().split(self.STDTYPE_DELIMITER)
+                    with open(test_file, "r", encoding="utf-8") as file_handle:
+                        file_data = file_handle.read().split(STDTYPE_DELIMITER)
                         test_case = file_data[0]
-                        expected_result = self.STDTYPE_DELIMITER.join(file_data[1:])
+                        expected_result = STDTYPE_DELIMITER.join(file_data[1:])
                     single_time = perf_counter()
                     result = run(
-                        ["java", self.OUTPUT_EXECUTABLE],
-                        capture_output=True, timeout=self.TEST_TIMEOUT,
-                        input=test_case.encode("utf-8")
+                        ["java", OUTPUT_EXECUTABLE],
+                        capture_output=True,
+                        timeout=TEST_TIMEOUT,
+                        input=test_case.encode("utf-8"),
+                        check=False
                     )
                     single_time = perf_counter() - single_time
                     self.time_taken += single_time
@@ -90,17 +98,25 @@ class Tester:
                         error = "\n".join(error.split("\n")[1:])
                     actual_result = f"{output}=====\n{error}"
                 except TimeoutExpired:
-                    print(f"\tTest {test_file} {WARNING}timed out{ENDC} in {single_time:.3f}s")
+                    print(
+                        f"\tTest {test_file} {WARNING}timed out{ENDC} in {single_time:.3f}s"
+                    )
                     self.tests_timedout += 1
                     continue
 
                 # Check if the results are correct
                 if actual_result == expected_result:
-                    print(f"\tTest {test_file.split('/')[-1]} is {OKGREEN}correct{ENDC} in {single_time:.3f}s")
+                    print(
+                        f"\tTest {test_file.split('/')[-1]} is "
+                        f"{OKGREEN}correct{ENDC} in {single_time:.3f}s"
+                    )
                     self.tests_passed += 1
                 else:
-                    print(f"\tTest {test_file.split('/')[-1]} is {FAIL}wrong{ENDC} in {single_time:.3f}s")
-                    if self.SHOW_FAILURE:
+                    print(
+                        f"\tTest {test_file.split('/')[-1]} is "
+                        f"{FAIL}wrong{ENDC} in {single_time:.3f}s"
+                    )
+                    if SHOW_FAILURE:
                         print(f"\n{WARNING}Expected:{ENDC}\n{expected_result}")
                         print(f"{WARNING}Got:{ENDC}\n{actual_result}", end="")
                     self.tests_failed += 1
@@ -112,7 +128,7 @@ class Tester:
             print(f"\t{FAIL}Keyboard interrupt{ENDC}")
 
     def __repr__(self):
-        # Return a string representation of the test object
+        """Return a string representation of the test object."""
         print()
         if self.tests_run == 0:
             return "No tests run yet"

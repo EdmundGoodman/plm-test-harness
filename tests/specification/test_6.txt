@@ -1,0 +1,7 @@
+DEF P2P xXx { 3*Q()+R(6,Q(5)) }
+/Thisisacomment/
+=====
+FAIL
+=====
+1
+Missing or invalid function name

@@ -15,9 +15,9 @@ the coursework in 2021.
 ## What is tested?
 
 - In the `specification/` folder, the examples and non-examples from the specification
-- In the `department_admin_affairs/` folder, the [test cases from the "Department of Administrative Affairs" student repository](https://github.com/Department-of-Administrative-Affairs/CS259-tests/tree/master/testprograms). *Note that these tests should be modified to include your custom error messages*
+- In the `department_admin_affairs/` folder, the [test cases from the "Department of Administrative Affairs" student repository](https://github.com/Department-of-Administrative-Affairs/CS259-tests/tree/master/testprograms). _Note that these tests should be modified to include your custom error messages_
 - In the `_accept/` folder, a set of tests to exercise syntactic and semantic edge cases which should pass
-- In the `_reject/` folder, a set of tests to exercise syntactic edge cases which should fail. *Note that these tests should be modified to include your custom error messages*
+- In the `_reject/` folder, a set of tests to exercise syntactic edge cases which should fail. _Note that these tests should be modified to include your custom error messages_
 
 ## Usage
 
@@ -40,8 +40,16 @@ of this, I have redacted all my error messages for the failing tests, as
 they would allude to my approach to error handling, and my approach
 shouldn't be treated as a canonical solution anyway.
 
-***As a result of this, for failing tests you should edit the test files
-to add the line number and error message of the failure.***
+**_As a result of this, for failing tests you should edit the test files
+to add the line number and error message of the failure._**
+
+#### Automatically generating expected outputs
+
+In the case that you have implemented error messages for your program and
+want to quickly set these to be the expected outputs for the tests, set the
+`WRITE_OUTPUT` constant in `test.py` to `True`. Then, for any tests where
+the expected output is empty this will be set to the output of your
+program.
 
 ### Test file format
 
@@ -64,8 +72,8 @@ Since the format is written in this way, you can add your own tests by creating
 new text files in the `test/` directory which include the word test in their
 name. They will then automatically get picked up and drive your JavaCC implementation.
 
-*If you write additional tests, please consider pull requesting them into this
-repository for others to use as well!*
+_If you write additional tests, please consider pull requesting them into this
+repository for others to use as well!_
 
 ## Other notes
 
@@ -80,4 +88,3 @@ Note that the coursework spec is subject to change, so it
 is possible that some tests will become out of date. This
 is a non-official set of tests made by a fallible student,
 so do not rely on them as ground truth!
-

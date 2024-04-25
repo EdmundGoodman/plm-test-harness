@@ -1,4 +1,5 @@
 """A test harness for the CS259 PLM language."""
+
 from dataclasses import dataclass
 from pathlib import Path
 from subprocess import TimeoutExpired, run
@@ -14,6 +15,7 @@ TESTS_DIRECTORY: str = "tests"
 TEST_TIMEOUT: float = 5.0
 SHOW_FAILURE: bool = True
 STDTYPE_DELIMITER: str = "=====\n"
+WRITE_OUTPUT: bool = False
 
 
 # Set terminal string colour escape codes
@@ -72,6 +74,11 @@ class Tester:
 
             print(f"{OKBLUE}===== Starting tests ====={ENDC}")
 
+            if WRITE_OUTPUT:
+                print("Writing output to test files. Proceed [y/N]? ", end="")
+                if input().lower() not in ["y", "yes"]:
+                    exit(0)
+
             for test_file in test_files:
                 print(f"{OKBLUE}{self.tests_run+1}/{self.num_tests}){ENDC}", end="")
                 self.tests_run += 1
@@ -88,7 +95,7 @@ class Tester:
                         capture_output=True,
                         timeout=TEST_TIMEOUT,
                         input=test_case.encode("utf-8"),
-                        check=False
+                        check=False,
                     )
                     single_time = perf_counter() - single_time
                     self.time_taken += single_time
@@ -120,6 +127,11 @@ class Tester:
                         print(f"\n{WARNING}Expected:{ENDC}\n{expected_result}")
                         print(f"{WARNING}Got:{ENDC}\n{actual_result}", end="")
                     self.tests_failed += 1
+
+                # If enabled write outputs to empty test files
+                if WRITE_OUTPUT and expected_result == "":
+                    with open(test_file, "a", encoding="utf-8") as file_handle:
+                        file_handle.write(actual_result)
 
             print(f"{OKBLUE}===== Finished tests ====={ENDC}")
 
